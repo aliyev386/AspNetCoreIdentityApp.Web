@@ -1,5 +1,7 @@
 using AspNetCoreIdentityApp.Web.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using AspNetCoreIdentityApp.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +13,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlCon"));
 });
 
-builder.Services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<AppDbContext>();
-
-
+builder.Services.AddIdentityWithExt();
 
 var app = builder.Build();
 
